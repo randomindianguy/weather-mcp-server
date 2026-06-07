@@ -1,0 +1,70 @@
+<svg width="100%" viewBox="0 0 680 520" xmlns="http://www.w3.org/2000/svg">
+<style>
+  text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+  .title { font-size: 16px; font-weight: 600; fill: #24292f; }
+  .box-label { font-size: 13px; font-weight: 600; fill: #fff; }
+  .box-sub { font-size: 11px; fill: rgba(255,255,255,0.85); }
+  .annotation { font-size: 11px; fill: #57606a; }
+  .arrow { stroke: #57606a; stroke-width: 1.5; fill: none; }
+  .arrow-label { font-size: 11px; fill: #57606a; font-style: italic; }
+  marker path { fill: none; stroke: #57606a; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .container { fill: #f6f8fa; stroke: #d0d7de; stroke-width: 1; rx: 12; }
+  .container-label { font-size: 13px; font-weight: 600; fill: #24292f; }
+  .container-sub { font-size: 11px; fill: #57606a; }
+</style>
+<defs>
+  <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9"/>
+  </marker>
+</defs>
+
+<text class="title" x="340" y="30" text-anchor="middle">MCP weather server — request cycle</text>
+
+<!-- User -->
+<rect x="250" y="50" width="180" height="40" rx="8" fill="#6e7781"/>
+<text class="box-label" x="340" y="75" text-anchor="middle">You (the user)</text>
+
+<line x1="340" y1="90" x2="340" y2="120" class="arrow" marker-end="url(#arrowhead)"/>
+<text class="arrow-label" x="348" y="110">"What's the humidity?"</text>
+
+<!-- Claude Desktop -->
+<rect x="195" y="120" width="290" height="50" rx="8" fill="#2f81f7"/>
+<text class="box-label" x="340" y="142" text-anchor="middle">Claude Desktop (MCP client)</text>
+<text class="box-sub" x="340" y="158" text-anchor="middle">LLM decides which tool to call</text>
+
+<line x1="340" y1="170" x2="340" y2="210" class="arrow" marker-end="url(#arrowhead)"/>
+<text class="arrow-label" x="348" y="195">JSON-RPC over stdio</text>
+
+<!-- Server container -->
+<rect x="100" y="210" width="480" height="200" class="container"/>
+<text class="container-label" x="340" y="238" text-anchor="middle">Your MCP server (src/index.ts)</text>
+
+<!-- Zod -->
+<rect x="130" y="258" width="170" height="40" rx="8" fill="#8250df"/>
+<text class="box-label" x="215" y="283" text-anchor="middle">Zod validates inputs</text>
+
+<line x1="300" y1="278" x2="350" y2="278" class="arrow" marker-end="url(#arrowhead)"/>
+
+<!-- Tool handler -->
+<rect x="350" y="258" width="200" height="40" rx="8" fill="#8250df"/>
+<text class="box-label" x="450" y="283" text-anchor="middle">Tool handler runs</text>
+
+<line x1="450" y1="298" x2="450" y2="338" class="arrow" marker-end="url(#arrowhead)"/>
+
+<!-- makeNWSRequest -->
+<rect x="305" y="338" width="240" height="40" rx="8" fill="#bf3989"/>
+<text class="box-label" x="425" y="363" text-anchor="middle">makeNWSRequest(url)</text>
+
+<!-- Return arrow -->
+<line x1="140" y1="278" x2="140" y2="210" class="arrow" marker-end="url(#arrowhead)" stroke-dasharray="4 3"/>
+<text class="annotation" x="68" y="248">Text result back</text>
+
+<line x1="425" y1="410" x2="425" y2="445" class="arrow" marker-end="url(#arrowhead)"/>
+<text class="arrow-label" x="433" y="432">HTTPS fetch</text>
+
+<!-- NWS API -->
+<rect x="260" y="445" width="280" height="50" rx="8" fill="#bf8700"/>
+<text class="box-label" x="400" y="467" text-anchor="middle">National Weather Service API</text>
+<text class="box-sub" x="400" y="483" text-anchor="middle">api.weather.gov (free, no auth)</text>
+
+</svg>
